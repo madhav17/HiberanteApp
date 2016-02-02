@@ -3,10 +3,12 @@ package com.intelligrape.model;
 import javax.persistence.*;
 
 @Table(name = "student")
+@Entity
 public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
     @Column(name = "name",nullable = false)
@@ -14,6 +16,11 @@ public class Student {
 
     @Column(name = "age",nullable = false)
     private int age;
+
+    Student(String name,int age){
+        this.name = name;
+        this.age = age;
+    }
 
     public int getId() {
         return id;
