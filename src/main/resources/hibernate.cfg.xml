@@ -14,5 +14,6 @@
         <property name="format_sql">false</property>
         <mapping class="com.intelligrape.model.User"/>
         <mapping class="com.intelligrape.model.Address"/>
+        <mapping class="com.intelligrape.model.Company"/>
     </session-factory>
 </hibernate-configuration>

@@ -1,12 +1,21 @@
 package com.intelligrape.model;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
 public class Address {
 
+    //1st Way
+
+    // So now these name is common in every entity which embed this
+    @Column(name = "city_name")
     private String city;
+
+    @Column(name = "state_name")
     private String state;
+
+    @Column(name="pin_Code")
     private String pinCode;
 
     public Address() {
