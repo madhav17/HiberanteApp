@@ -12,10 +12,13 @@ public class HibernateMain {
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionFactory.openSession();
 
-        User user = new User("Madhav");
+        Address address = new Address("ABC","XYZ","123");
+        Address address1 = new Address("ABC","XYZ","123");
+        User user = new User("Madhav",address);
+        Try try1 = new Try("xcv",address1);
         session.beginTransaction();
         session.save(user);
-        session.save(new User("Priya"));
+        session.save(try1);
         session.getTransaction().commit();
         session.close();
 

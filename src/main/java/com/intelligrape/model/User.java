@@ -20,8 +20,22 @@ public class User {
 
     private String userName;
 
-    public User(String userName) {
+    @Embedded
+//    @Embedded
+    private Address address;
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+
+    public User(String userName,Address address) {
         this.userName = userName;
+        this.address = address;
     }
 
     public int getUserId() {
