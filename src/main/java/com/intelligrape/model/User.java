@@ -2,24 +2,50 @@ package com.intelligrape.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
 public class User {
 
     @Id // create PK (Surrogate key)
-//    @GeneratedValue
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@GeneratedValue asking hibernate to generate value and it check the data type and generate value
 
-//        @GeneratedValue(strategy = GenerationType.AUTO)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//It has some strategy and its of 4 type by default it auto
-    // auto means hibernate decide startegy to use to generate unique keys
     private int userId;
 
     private String userName;
 
+    // what we need collection to be member address keep track of all the address of user we do not know how many address
+    // we also need to intialize it not required and it depend how we intailize it
+    // we will require an annotation to let hibernate know that to save this as list
+
+    // it will mark entire collection object to saved and to embedded as object
+    @ElementCollection
+    //    @ElementCollection(targetClass = "Address",fetch = FetchType.EAGER)
+
+
+    private Set<Address> addressSet = new HashSet<Address>();
+
+    /*
+    * It will insert the address in User_addressSet table  nameofEntity_collection name
+    * and create FK User_userId for reference 
+    *
+    * */
+
+    public Set<Address> getAddressSet() {
+        return addressSet;
+    }
+
+    public void setAddressSet(Set<Address> addressSet) {
+        this.addressSet = addressSet;
+    }
+
+
+    public User(String userName,Set<Address> addressSet) {
+        this.userName = userName;
+        this.addressSet = addressSet;
+    }
 
     public User(String userName) {
         this.userName = userName;
