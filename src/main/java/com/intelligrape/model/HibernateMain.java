@@ -4,10 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.util.ArrayDeque;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class HibernateMain {
 
@@ -18,7 +15,7 @@ public class HibernateMain {
         Address address = new Address("1","XYZ","123");
         Address address1 = new Address("2","XYZ","123");
         Address address2 = new Address("3","XYZ","123");
-        Set<Address> addresses = new HashSet<Address>();
+        List<Address> addresses = new ArrayList<Address>();
         addresses.add(address);
         addresses.add(address1);
         addresses.add(address2);
