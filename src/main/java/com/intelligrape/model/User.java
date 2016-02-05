@@ -18,28 +18,22 @@ public class User {
     private String userName;
 
 
+    @OneToOne(optional = true)
+//    @OneToOne
+    @JoinColumn(name = "vehicle_id")
+    private Vehicle vehicle;
 
-    @ElementCollection()
-//    @ElementCollection(fetch = FetchType.EAGER)
-     private Collection<Address> addressList = new ArrayList<Address>();
-
-
-    public Collection<Address> getAddressList() {
-        return addressList;
+    public Vehicle getVehicle() {
+        return vehicle;
     }
 
-    public void setAddressList(List<Address> addressList) {
-        this.addressList = addressList;
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
-
-    public User(String userName,List<Address> addressList) {
+    public User(String userName,Vehicle vehicle) {
         this.userName = userName;
-        this.addressList = addressList;
-    }
-
-    public User(String userName) {
-        this.userName = userName;
+        this.vehicle = vehicle;
     }
 
     public int getUserId() {
