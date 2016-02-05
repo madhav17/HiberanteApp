@@ -17,23 +17,25 @@ public class User {
 
     private String userName;
 
+    @OneToMany
+    //joinColumns - name  of the joinColumns from user
+    //inverseJoinColumns - name  of the joinColumns from vehicle
+    @JoinTable(name = "abc",joinColumns =  @JoinColumn(name = "abc_user"),inverseJoinColumns = @JoinColumn(name = "abc_vehicle"))
+    private Set<Vehicle> vehicleSet;
 
-    @OneToOne(optional = true)
-//    @OneToOne
-    @JoinColumn(name = "vehicle_id")
-    private Vehicle vehicle;
 
-    public Vehicle getVehicle() {
-        return vehicle;
+
+    public Set<Vehicle> getVehicle() {
+        return vehicleSet;
     }
 
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
+    public void setVehicle(Set<Vehicle> vehicleSet) {
+        this.vehicleSet = vehicleSet;
     }
 
-    public User(String userName,Vehicle vehicle) {
+    public User(String userName,Set<Vehicle> vehicleSet) {
         this.userName = userName;
-        this.vehicle = vehicle;
+        this.vehicleSet = vehicleSet;
     }
 
     public int getUserId() {

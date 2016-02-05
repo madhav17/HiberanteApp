@@ -10,6 +10,7 @@ public class Vehicle {
     @Id
     @GeneratedValue
     private int vehicleId;
+    private String vehicleName;
 
     public Vehicle(){
 
@@ -18,8 +19,6 @@ public class Vehicle {
     public Vehicle(String vehicleName) {
         this.vehicleName = vehicleName;
     }
-
-    private String vehicleName;
 
     public int getVehicleId() {
         return vehicleId;
