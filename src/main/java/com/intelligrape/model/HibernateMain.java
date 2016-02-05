@@ -44,6 +44,7 @@ public class HibernateMain {
 
         System.out.println(user.getUserName());
         System.out.println("sdfsdf");
+        session.close(); // to check lazy intialization an give error
         System.out.println(user.getAddressList());
         System.out.println("sdfsdf 1");
         System.out.println(user.getAddressList());
