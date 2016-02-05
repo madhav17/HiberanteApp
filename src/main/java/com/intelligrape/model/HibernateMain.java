@@ -15,6 +15,7 @@ public class HibernateMain {
         Address address = new Address("ABC","XYZ","123");
         Address address1 = new Address("Company","Company");
         User user = new User("Madhav",address,address1);
+//        System.out.println(user.getOfficeAddress().getCity());
         session.beginTransaction();
         session.save(user);
         session.getTransaction().commit();

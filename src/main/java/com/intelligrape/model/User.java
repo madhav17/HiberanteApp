@@ -54,6 +54,16 @@ public class User {
 
     private Address officeAddress;
 
+    // by default column value is nullable true
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public Address getHomeAddress() {
         return homeAddress;
@@ -73,6 +83,13 @@ public class User {
 
     public User(String userName,Address homeAddress,Address officeAddress) {
         this.userName = userName;
+        this.homeAddress = homeAddress;
+        this.officeAddress = officeAddress;
+    }
+
+    public User(String userName,String description,Address homeAddress,Address officeAddress) {
+        this.userName = userName;
+        this.description = description;
         this.homeAddress = homeAddress;
         this.officeAddress = officeAddress;
     }
