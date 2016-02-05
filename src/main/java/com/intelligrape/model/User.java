@@ -7,7 +7,7 @@ import java.util.Date;
 @Table(name = "user")
 public class User {
 
-    // So let suppose our is the combination of 2 columns and that itself is an object
+    // So let suppose our Id is the combination of 2 columns and that itself is an object
     // how to do it
 
     //@Id and @Embeddded annotation will not work
