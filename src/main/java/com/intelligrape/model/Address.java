@@ -9,12 +9,8 @@ public class Address {
     //1st Way
 
     // So now these name is common in every entity which embed this
-    @Column(name = "city_name",nullable = true)
     private String city;
-
-    @Column(name = "state_name")
     private String state;
-
     @Column(name="pin_Code")
     private String pinCode;
 
