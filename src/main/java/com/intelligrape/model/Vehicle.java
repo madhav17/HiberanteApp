@@ -3,6 +3,7 @@ package com.intelligrape.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity(name = "vehicle")
 public class Vehicle {
@@ -12,6 +13,16 @@ public class Vehicle {
     private int vehicleId;
     private String vehicleName;
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @ManyToOne
+    private User user;
     public Vehicle(){
 
     }

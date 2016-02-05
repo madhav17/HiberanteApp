@@ -1,5 +1,6 @@
 package com.intelligrape.model;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CollectionId;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -17,10 +18,8 @@ public class User {
 
     private String userName;
 
-    @OneToMany
-    //joinColumns - name  of the joinColumns from user
-    //inverseJoinColumns - name  of the joinColumns from vehicle
-    @JoinTable(name = "abc",joinColumns =  @JoinColumn(name = "abc_user"),inverseJoinColumns = @JoinColumn(name = "abc_vehicle"))
+//    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private Set<Vehicle> vehicleSet;
 
 
