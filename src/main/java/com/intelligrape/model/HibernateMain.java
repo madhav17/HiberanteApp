@@ -34,7 +34,7 @@ public class HibernateMain {
         //2. we get address were user_id is of above user;
 
         // above command will give the user does the list also get pulled up
-        // the answer is yes
+        // the answer is no
 
         // let suppose we have many address . so, when we get user then all address will be pulled and increase cost
 
@@ -51,10 +51,10 @@ public class HibernateMain {
 
         // how calling getter hibernate pull all values
         /*
-        * hibernate uses proxy class to get data.Hibernate instead of getting actual we want it will get the proxy of that
+        * hibernate uses proxy class to get data.Hibernate instead of getting actual data we want it will get the proxy object of that
         * class that is a sub class of User class
         *
-        * when we make a call to getListAdress() it has the code to get data and then it exceute the query get the data.
+        * when we make a call to getListAddress() it has the code to get data and then it execute the query get the data.
         *
         * after it does that then it do parent.getList()
         *
