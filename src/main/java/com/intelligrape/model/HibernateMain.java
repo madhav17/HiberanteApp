@@ -13,12 +13,9 @@ public class HibernateMain {
         Session session = sessionFactory.openSession();
 
         Address address = new Address("ABC","XYZ","123");
-        Address address1 = new Address("ABC","XYZ","123");
-        User user = new User("Madhav",address);
-        Try try1 = new Try("xcv",address1);
+        User user = new User("Madhav");
         session.beginTransaction();
         session.save(user);
-        session.save(try1);
         session.getTransaction().commit();
         session.close();
 

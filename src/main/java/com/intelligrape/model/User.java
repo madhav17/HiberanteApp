@@ -13,29 +13,16 @@ public class User {
     //@GeneratedValue asking hibernate to generate value and it check the data type and generate value
 
 //        @GeneratedValue(strategy = GenerationType.AUTO)
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //It has some strategy and its of 4 type by default it auto
     // auto means hibernate decide startegy to use to generate unique keys
     private int userId;
 
     private String userName;
 
-    @Embedded
-//    @Embedded
-    private Address address;
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-
-    public User(String userName,Address address) {
+    public User(String userName) {
         this.userName = userName;
-        this.address = address;
     }
 
     public int getUserId() {
@@ -54,7 +41,7 @@ public class User {
         this.userName = userName;
     }
 
-    public User(){
+    public User() {
 
     }
 }
