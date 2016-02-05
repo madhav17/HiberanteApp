@@ -9,9 +9,10 @@ public class Address {
     //1st Way
 
     // So now these name is common in every entity which embed this
+    @Column(name = "city_name")
     private String city;
     private String state;
-    @Column(name="pin_Code")
+
     private String pinCode;
 
     public Address() {
