@@ -9,7 +9,7 @@ public class Address {
     //1st Way
 
     // So now these name is common in every entity which embed this
-    @Column(name = "city_name")
+    @Column(name = "city_name",nullable = true)
     private String city;
 
     @Column(name = "state_name")
@@ -24,6 +24,11 @@ public class Address {
 
     public Address(String city,String state,String pinCode){
         this.city = city;
+        this.state = state;
+        this.pinCode = pinCode;
+    }
+
+    public Address(String state,String pinCode){
         this.state = state;
         this.pinCode = pinCode;
     }

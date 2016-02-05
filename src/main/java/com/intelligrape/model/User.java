@@ -7,6 +7,17 @@ import java.util.Date;
 @Table(name = "user")
 public class User {
 
+    // So let suppose our is the combination of 2 columns and that itself is an object
+    // how to do it
+
+    //@Id and @Embeddded annotation will not work
+
+    //@EmbeddedId as an Id
+    //private LoginName loginName;
+    // and we override the attribute also
+
+
+
     @Id // create PK (Surrogate key)
 //    @GeneratedValue
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,22 +31,50 @@ public class User {
 
     private String userName;
 
-    @Embedded
+    //    @Embedded
 //    @Embedded
-    private Address address;
 
-    public Address getAddress() {
-        return address;
+    // Now we have 2 address in User and both the column name cannot be same for home and office address
+    //How to fix it or override it
+
+    //override
+
+    //it help is re configure it or change their default behaviour
+    // it name of the attribute/field which is attribute to be overridded
+    // AttributeOverrides allow us to override multiple attribute in one go
+    @AttributeOverrides({
+
+    // here we can also overidde the constraints also
+    @AttributeOverride(name = "city" , column = @Column(name = "homeAddress_city",nullable = false )),
+    @AttributeOverride(name = "state" , column = @Column(name = "homeAddress_state")),
+    @AttributeOverride(name = "pinCode" , column = @Column(name = "homeAddress_pin_code",nullable = false ))
+
+    })
+    private Address homeAddress;
+
+    private Address officeAddress;
+
+
+    public Address getHomeAddress() {
+        return homeAddress;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setHomeAddress(Address homeAddress) {
+        this.homeAddress = homeAddress;
     }
 
+    public Address getOfficeAddress() {
+        return officeAddress;
+    }
 
-    public User(String userName,Address address) {
+    public void setOfficeAddress(Address officeAddress) {
+        this.officeAddress = officeAddress;
+    }
+
+    public User(String userName,Address homeAddress,Address officeAddress) {
         this.userName = userName;
-        this.address = address;
+        this.homeAddress = homeAddress;
+        this.officeAddress = officeAddress;
     }
 
     public int getUserId() {

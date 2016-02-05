@@ -13,12 +13,10 @@ public class HibernateMain {
         Session session = sessionFactory.openSession();
 
         Address address = new Address("ABC","XYZ","123");
-        Address address1 = new Address("Company","Company","Company");
-        User user = new User("Madhav",address);
-        Company company = new Company("Intelligrape",address);
+        Address address1 = new Address("Company","Company");
+        User user = new User("Madhav",address,address1);
         session.beginTransaction();
         session.save(user);
-        session.save(company);
         session.getTransaction().commit();
         session.close();
 
