@@ -20,7 +20,7 @@ public class User {
     // we also need to intialize it not required and it depend how we intailize it
     // we will require an annotation to let hibernate know that to save this as list
 
-    // it will mark entire collection object to saved and to embedded as object
+    // it will mark entire collection object to saved and not as embedded as object
     @ElementCollection
     //    @ElementCollection(targetClass = "Address",fetch = FetchType.EAGER)
 
@@ -29,7 +29,7 @@ public class User {
 
     /*
     * It will insert the address in User_addressSet table  nameofEntity_collection name
-    * and create FK User_userId for reference 
+    * and create FK User_userId for reference
     *
     * */
 
