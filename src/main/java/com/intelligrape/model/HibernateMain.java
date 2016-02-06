@@ -13,10 +13,12 @@ public class HibernateMain {
         Session session = sessionFactory.openSession();
 
         Set<Vehicle> vehicles = new HashSet<Vehicle>();
-        vehicles.add(new Vehicle("Baleno"));
-        vehicles.add(new Vehicle("Ignis"));
+        User user = new User("Madhav");
+        vehicles.add(new Vehicle("Baleno",user));
+        vehicles.add(new Vehicle("Ignis",user));
         session.beginTransaction();
-        session.save(new User("Madhav",vehicles));
+        user.setVehicle(vehicles);
+        session.save(user);
         session.getTransaction().commit();
         session.close();
 

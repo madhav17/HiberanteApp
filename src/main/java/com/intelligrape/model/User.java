@@ -19,7 +19,9 @@ public class User {
     private String userName;
 
 //    @OneToMany
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
+    // mappedBy say where you want mapping to happen
+    // So,now mapping will take place at vehicle using user reference variable of vehicle entity
     private Set<Vehicle> vehicleSet;
 
 
@@ -35,6 +37,10 @@ public class User {
     public User(String userName,Set<Vehicle> vehicleSet) {
         this.userName = userName;
         this.vehicleSet = vehicleSet;
+    }
+
+    public User(String userName) {
+        this.userName = userName;
     }
 
     public int getUserId() {

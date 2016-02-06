@@ -1,9 +1,6 @@
 package com.intelligrape.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity(name = "vehicle")
 public class Vehicle {
@@ -22,13 +19,19 @@ public class Vehicle {
     }
 
     @ManyToOne
+    // after we done with mapped by in user we need to specify JoinColumn in Vehicle
+    @JoinColumn(name = "user_id")
+    // then hibernate know to follow this mapping not to create new table
     private User user;
+
+
     public Vehicle(){
 
     }
 
-    public Vehicle(String vehicleName) {
+    public Vehicle(String vehicleName,User user) {
         this.vehicleName = vehicleName;
+        this.user = user;
     }
 
     public int getVehicleId() {
