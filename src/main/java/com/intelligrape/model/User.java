@@ -13,15 +13,14 @@ import java.util.*;
 public class User {
 
     @Id // create PK (Surrogate key)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private int userId;
 
     private String userName;
 
 
     public User(String userName,Collection<Vehicle> vehicles) {
-        this.userName = userName;
-    }
+        this.userName = userName;    }
 
     public User(String userName) {
         this.userName = userName;

@@ -15,5 +15,7 @@
         <mapping class="com.intelligrape.model.User"/>
         <mapping class="com.intelligrape.model.Address"/>
         <mapping class="com.intelligrape.model.Vehicle"/>
+        <mapping class="com.intelligrape.model.TwoWheeler"/>
+        <mapping class="com.intelligrape.model.FourWheeler"/>
     </session-factory>
 </hibernate-configuration>
