@@ -14,7 +14,7 @@ public class Vehicle {
 
 
     @ManyToMany
-    // It should have one mapping table
+    // It should have atleast one mapping table
     // and it has collection at both end with @ManyToMany
     private Collection<User> users = new ArrayList<User>();
 

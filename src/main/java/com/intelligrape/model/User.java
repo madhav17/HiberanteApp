@@ -19,7 +19,7 @@ public class User {
     private String userName;
 
     @ManyToMany
-    // It should have one mapping table
+    // It should have atleast one mapping table
     // and it has collection at both end with @ManyToMany
     private Collection<Vehicle> vehicles = new ArrayList<Vehicle>();
 
