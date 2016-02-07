@@ -18,22 +18,9 @@ public class User {
 
     private String userName;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Collection<Vehicle> vehicles = new ArrayList<Vehicle>();
-
-
-
-    public Collection<Vehicle> getVehicles() {
-        return vehicles;
-    }
-
-    public void setVehicles(Collection<Vehicle> vehicles) {
-        this.vehicles = vehicles;
-    }
 
     public User(String userName,Collection<Vehicle> vehicles) {
         this.userName = userName;
-        this.vehicles = vehicles;
     }
 
     public User(String userName) {

@@ -17,9 +17,6 @@ public class HibernateMain {
         Vehicle v = new Vehicle("Baleno");
         Vehicle v1 = new Vehicle("Ignis");
 
-        user.getVehicles().add(v);
-        user.getVehicles().add(v1);
-
         session.save(user);
 
         session.getTransaction().commit();
