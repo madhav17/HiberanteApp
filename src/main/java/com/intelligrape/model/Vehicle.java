@@ -1,6 +1,8 @@
 package com.intelligrape.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity(name = "vehicle")
 public class Vehicle {
@@ -10,29 +12,33 @@ public class Vehicle {
     private int vehicleId;
     private String vehicleName;
 
-    public User getUser() {
-        return user;
+
+    @ManyToMany
+    // It should have one mapping table
+    // and it has collection at both end with @ManyToMany
+    private Collection<User> users = new ArrayList<User>();
+
+    public Collection<User> getUsers() {
+        return users;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsers(Collection<User> users) {
+        this.users = users;
     }
-
-    @ManyToOne
-    // after we done with mapped by in user we need to specify JoinColumn in Vehicle
-    @JoinColumn(name = "user_id")
-    // then hibernate know to follow this mapping not to create new table
-    private User user;
-
 
     public Vehicle(){
 
     }
 
-    public Vehicle(String vehicleName,User user) {
+    public Vehicle(String vehicleName,Collection<User> users) {
         this.vehicleName = vehicleName;
-        this.user = user;
+        this.users = users;
     }
+
+    public Vehicle(String vehicleName) {
+        this.vehicleName = vehicleName;
+    }
+
 
     public int getVehicleId() {
         return vehicleId;

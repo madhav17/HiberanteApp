@@ -18,25 +18,24 @@ public class User {
 
     private String userName;
 
-//    @OneToMany
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
-    // mappedBy say where you want mapping to happen
-    // So,now mapping will take place at vehicle using user reference variable of vehicle entity
-    private Set<Vehicle> vehicleSet;
+    @ManyToMany
+    // It should have one mapping table
+    // and it has collection at both end with @ManyToMany
+    private Collection<Vehicle> vehicles = new ArrayList<Vehicle>();
 
 
 
-    public Set<Vehicle> getVehicle() {
-        return vehicleSet;
+    public Collection<Vehicle> getVehicles() {
+        return vehicles;
     }
 
-    public void setVehicle(Set<Vehicle> vehicleSet) {
-        this.vehicleSet = vehicleSet;
+    public void setVehicles(Collection<Vehicle> vehicles) {
+        this.vehicles = vehicles;
     }
 
-    public User(String userName,Set<Vehicle> vehicleSet) {
+    public User(String userName,Collection<Vehicle> vehicles) {
         this.userName = userName;
-        this.vehicleSet = vehicleSet;
+        this.vehicles = vehicles;
     }
 
     public User(String userName) {
