@@ -19,8 +19,9 @@ public class User {
     private String userName;
 
     @ManyToMany
-    // It should have atleast one mapping table
-    // and it has collection at both end with @ManyToMany
+    // and join column annotation can be defined  here similar to one to many
+    //but join column annotation is defined in that class which is creating mapping that is user not the vehicle
+    // Now this many to many is doing mapping
     private Collection<Vehicle> vehicles = new ArrayList<Vehicle>();
 
 

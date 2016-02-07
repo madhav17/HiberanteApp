@@ -13,9 +13,8 @@ public class Vehicle {
     private String vehicleName;
 
 
-    @ManyToMany
-    // It should have atleast one mapping table
-    // and it has collection at both end with @ManyToMany
+    @ManyToMany(mappedBy = "vehicles")
+    // and this many to many is not doing mapping becoz we have told hibernate that is mapped by vehicles
     private Collection<User> users = new ArrayList<User>();
 
     public Collection<User> getUsers() {
