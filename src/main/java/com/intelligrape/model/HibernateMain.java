@@ -39,7 +39,7 @@ public class HibernateMain {
         session.getTransaction().commit();
         session.close();
         System.out.println(user.getUserName());
-        // it will access irrespective of session is closed becoz first value can be fetched
+        // it will access data irrespective of session is closed becoz first level value can be fetched
 
     }
 }
