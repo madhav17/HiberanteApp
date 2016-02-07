@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity(name = "vehicle")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(
+        name = "vehicle_type",
+        discriminatorType = DiscriminatorType.STRING
+)
+@DiscriminatorValue("base_vehicle")
 public class Vehicle {
 
     @Id
