@@ -1,5 +1,8 @@
 package com.intelligrape.model;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,26 +15,27 @@ public class Vehicle {
     private int vehicleId;
     private String vehicleName;
 
+    @ManyToOne
+    @NotFound(action = NotFoundAction.IGNORE)
+    private User user;
 
-    @ManyToMany(mappedBy = "vehicles")
-    // and this many to many is not doing mapping becoz we have told hibernate that is mapped by vehicles
-    private Collection<User> users = new ArrayList<User>();
 
-    public Collection<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(Collection<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
+
 
     public Vehicle(){
 
     }
 
-    public Vehicle(String vehicleName,Collection<User> users) {
+    public Vehicle(String vehicleName,User user) {
         this.vehicleName = vehicleName;
-        this.users = users;
+        this.user = user;
     }
 
     public Vehicle(String vehicleName) {
