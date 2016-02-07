@@ -12,15 +12,13 @@ public class HibernateMain {
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionFactory.openSession();
 
-        Set<Vehicle> vehicles = new HashSet<Vehicle>();
-        vehicles.add(new Vehicle("Baleno"));
-        vehicles.add(new Vehicle("Ignis"));
         session.beginTransaction();
-        session.save(new User("Madhav",vehicles));
+        User user = new User("Madhav");
+        user.getVehicle().add(new Vehicle("Baleno"));
+        user.getVehicle().add(new Vehicle("Ignis"));
+        session.save(user);
         session.getTransaction().commit();
         session.close();
-
-
 
 
     }

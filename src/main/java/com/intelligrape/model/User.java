@@ -20,7 +20,7 @@ public class User {
 
 //    @OneToMany
     @OneToMany(cascade = CascadeType.ALL)
-    private Set<Vehicle> vehicleSet;
+    private Set<Vehicle> vehicleSet = new HashSet<Vehicle>();
 
 
 
@@ -35,6 +35,10 @@ public class User {
     public User(String userName,Set<Vehicle> vehicleSet) {
         this.userName = userName;
         this.vehicleSet = vehicleSet;
+    }
+
+    public User(String userName) {
+        this.userName = userName;
     }
 
     public int getUserId() {
