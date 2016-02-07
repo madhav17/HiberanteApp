@@ -5,19 +5,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity(name = "vehicle")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-// we do not have extra column with Null in row as compared to single table
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Vehicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    /*
-    *
-    * The problem here is that you mix "table-per-class" inheritance and GenerationType.Auto.
-    * Consider an identity column in MsSQL. It is column based.
-    * In a "table-per-class" strategy you use one table per class and each one has an ID.
-    *
-    * */
     private int vehicleId;
     private String vehicleName;
 

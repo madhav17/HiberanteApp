@@ -6,10 +6,6 @@ import javax.persistence.Entity;
 @Entity
 public class TwoWheeler extends Vehicle {
 
-    /*
-    *
-    * It inherit the data member and annotation from parent class like @Id, @GeneratedValue
-    * */
     private String steeringHandle;
 
     public String getSteeringHandle() {
