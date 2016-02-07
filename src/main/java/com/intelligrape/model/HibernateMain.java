@@ -20,12 +20,6 @@ public class HibernateMain {
         user.getVehicles().add(v);
         user.getVehicles().add(v1);
 
-        // now this not necessary
-//        v.getUsers().add(user);
-//        v1.getUsers().add(user);
-
-        session.save(v);
-        session.save(v1);
         session.save(user);
 
         session.getTransaction().commit();
