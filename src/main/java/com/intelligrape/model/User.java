@@ -1,14 +1,15 @@
 package com.intelligrape.model;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CollectionId;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.*;
 
 @Entity
+@org.hibernate.annotations.Entity(selectBeforeUpdate = true)
+// it means makes a select before update and update if there is any change
 @Table(name = "user")
 public class User {
 
