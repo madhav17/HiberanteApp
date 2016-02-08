@@ -26,15 +26,27 @@ public class HibernateMain {
         session = sessionFactory.openSession();
         session.beginTransaction();
 
-        Query query =  session.createQuery("from User");
-        List<User> userList = query.list();
+//        Query query =  session.createQuery("select userName from User");
+        Query query =  session.createQuery("select new list (id,userName) from User");
+        //Query query =  session.createQuery("select new map (id,userName) from User");
+        query.setFirstResult(5);
+        query.setMaxResults(4);
+//        List<String> userList = query.list();
+        List<List> userList = (List<List>)query.list();
+//        List<Map> userList = (List<Map>)query.list();
         session.getTransaction().commit();
 
-        Query query1 = session.createQuery("from User  where id > 5");
-        List<User> userList1 = query1.list();
         session.close();
-        System.out.println(userList.size());
-        System.out.println(userList1.size());
+//        for (String s : userList){
+//            System.out.println(s);
+//        }
+        for (List l: userList){
+            System.out.println(l.get(0));
+            System.out.println(l.get(1));
+        }
+//        for (Map<String,String> map : userList){
+//            System.out.println(map);
+//        }
 
     }
 }
