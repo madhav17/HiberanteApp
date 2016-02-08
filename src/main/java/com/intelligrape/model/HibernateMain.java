@@ -28,7 +28,7 @@ public class HibernateMain {
 
         Query query =  session.createQuery("from User");
         List<User> userList = query.list();
-        session.getTransaction().commit();
+//        session.getTransaction().commit();
 
         Query query1 = session.createQuery("from User  where id > 5");
         List<User> userList1 = query1.list();
