@@ -4,13 +4,25 @@ import org.hibernate.annotations.*;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import java.util.*;
 
 @Entity
-@org.hibernate.annotations.Entity(selectBeforeUpdate = true)
-// it means makes a select before update and update if there is any change
 @Table(name = "user")
+@NamedQuery(name="User.findById",query="from User where id = ?")
+// it will require 2 parameters
+//1st name of query
+//2nd is query itself
+// this query will give me user object of that id supplied
+// parameter can be named or positional
+@NamedNativeQuery(name="User.findByUserName",query = "select * from user where userName = ?",resultClass = User.class)
+// now it is an SQL we need to refer column names and table name
+// we can specify result class name in that why we need it
+//if it a named namedquery(HQL) we now the class but in native hibernate does not know what object to cast Result
+//class allow hibernate to know and cast into that object
+// the advantage is that we have a stored procedure and we need to run we can use this option and can run it
 public class User {
 
     @Id // create PK (Surrogate key)

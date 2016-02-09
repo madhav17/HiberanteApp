@@ -26,16 +26,18 @@ public class HibernateMain {
         session = sessionFactory.openSession();
         session.beginTransaction();
 
-        String minId = "5 or 1=1";
-//        int minId = 5;
-        // so now first condition may true or false but second will always bw true 1=1 and return all data
-        // they do anything append ; (semicolon) and writing other query to delete data
-        Query query = session.createQuery("from User where id > " + minId );
+        // here we use session object to get named query it take name of the query
+        Query query = session.getNamedQuery("User.findByUserName");
+//        Query query = session.getNamedQuery("User.findById");
+//        query.setInteger(0,1);
+        query.setString(0,"Madhav1");
         List<User> userList = query.list();
         session.getTransaction().commit();
         session.close();
-        for (User user : userList)
+
+        for(User user : userList){
             System.out.println(user.getUserName());
+        }
 
     }
 }
