@@ -26,11 +26,12 @@ public class HibernateMain {
         session = sessionFactory.openSession();
         session.beginTransaction();
 
-        String minId = "5 or 1=1";
-//        int minId = 5;
-        // so now first condition may true or false but second will always bw true 1=1 and return all data
-        // they do anything append ; (semicolon) and writing other query to delete data
-        Query query = session.createQuery("from User where id > " + minId );
+//        ? is a parameter ? is a place holder where parameter needs to go and the ? parameter will be replace
+        //by some value
+        Query query = session.createQuery("from User where id > ? and userName = ?");
+        query.setInteger(0,5);
+        query.setString(1,"Madhav10");
+        // it take 2 parameter 1st is the position where to replace ? and 2nd is the value with which we want to replace value
         List<User> userList = query.list();
         session.getTransaction().commit();
         session.close();
