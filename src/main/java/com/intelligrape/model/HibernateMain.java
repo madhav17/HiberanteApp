@@ -28,10 +28,10 @@ public class HibernateMain {
 
 //        ? is a parameter ? is a place holder where parameter needs to go and the ? parameter will be replace
         //by some value
-        Query query = session.createQuery("from User where id > ? and userName = ?");
-        query.setInteger(0,5);
-        query.setString(1,"Madhav10");
-        // it take 2 parameter 1st is the position where to replace ? and 2nd is the value with which we want to replace value
+        Query query = session.createQuery("from User where id > :userId and userName = :userName");
+        query.setInteger("userId",5);
+        query.setString("userName","Madhav10");
+        // it take 2 parameter 1st is the position is the name of variable which is to be set
         List<User> userList = query.list();
         session.getTransaction().commit();
         session.close();
