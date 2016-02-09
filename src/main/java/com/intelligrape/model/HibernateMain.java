@@ -26,27 +26,16 @@ public class HibernateMain {
         session = sessionFactory.openSession();
         session.beginTransaction();
 
-//        Query query =  session.createQuery("select userName from User");
-        Query query =  session.createQuery("select new list (id,userName) from User");
-        //Query query =  session.createQuery("select new map (id,userName) from User");
-        query.setFirstResult(5);
-        query.setMaxResults(4);
-//        List<String> userList = query.list();
-        List<List> userList = (List<List>)query.list();
-//        List<Map> userList = (List<Map>)query.list();
+        String minId = "5 or 1=1";
+//        int minId = 5;
+        // so now first condition may true or false but second will always bw true 1=1 and return all data
+        // they do anything append ; (semicolon) and writing other query to delete data
+        Query query = session.createQuery("from User where id > " + minId );
+        List<User> userList = query.list();
         session.getTransaction().commit();
-
         session.close();
-//        for (String s : userList){
-//            System.out.println(s);
-//        }
-        for (List l: userList){
-            System.out.println(l.get(0));
-            System.out.println(l.get(1));
-        }
-//        for (Map<String,String> map : userList){
-//            System.out.println(map);
-//        }
+        for (User user : userList)
+            System.out.println(user.getUserName());
 
     }
 }
