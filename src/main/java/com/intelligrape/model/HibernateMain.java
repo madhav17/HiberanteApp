@@ -1,9 +1,11 @@
 package com.intelligrape.model;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.*;
 
@@ -26,18 +28,23 @@ public class HibernateMain {
         session = sessionFactory.openSession();
         session.beginTransaction();
 
-        // here we use session object to get named query it take name of the query
-        Query query = session.getNamedQuery("User.findByUserName");
-//        Query query = session.getNamedQuery("User.findById");
-//        query.setInteger(0,1);
-        query.setString(0,"Madhav1");
-        List<User> userList = query.list();
-        session.getTransaction().commit();
-        session.close();
-
+//        session.createQuery() has 2 method 1st sTring and 2nd Class
+        Criteria criteria = session.createCriteria(User.class);
+        //criteria has add method that take restrictions
+        criteria.add(Restrictions.eq("userName","Madhav10"));
+        // to execute it call list()
+         List<User> userList =  criteria.list();
+//        session.getTransaction().commit();
+//        session.close();
         for(User user : userList){
             System.out.println(user.getUserName());
         }
+
+
+//        Named query(HQL) is hibernate query language. HQL at certain point is not different from SQL
+//        as the query grows it is difficult to change and manage.
+
+//        therefore than comes criteria query
 
     }
 }
