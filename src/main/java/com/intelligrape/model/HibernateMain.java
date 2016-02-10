@@ -28,14 +28,18 @@ public class HibernateMain {
         session = sessionFactory.openSession();
         session.beginTransaction();
 
-//        session.createQuery() has 2 method 1st sTring and 2nd Class
         Criteria criteria = session.createCriteria(User.class);
-        //criteria has add method that take restrictions
-        criteria.add(Restrictions.eq("userName","Madhav10"));
-        // to execute it call list()
+        criteria.add(Restrictions.eq("userName","Madhav10"))
+                .add(Restrictions.gt("userId",5));
+
+        criteria.add(Restrictions.like("userName","Madhav%"));
+        //or So,in that we need an OR clause
+
+        // Restrictions.or() takes 2 criteria
+        criteria.add(Restrictions.or(Restrictions.between("userId",1,5),Restrictions.eq("userName","Madhav10")));
          List<User> userList =  criteria.list();
-//        session.getTransaction().commit();
-//        session.close();
+        session.getTransaction().commit();
+        session.close();
         for(User user : userList){
             System.out.println(user.getUserName());
         }
