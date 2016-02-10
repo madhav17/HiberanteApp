@@ -30,52 +30,28 @@ public class HibernateMain {
         session = sessionFactory.openSession();
         session.beginTransaction();
 
-        User exampleUser = new User();
-        // we can set multiple porperties
-//        exampleUser.setUserName("Madhav1"); // we set the value to fetch value accordingly
-        // used with
-        exampleUser.setUserName("Madhav%"); // we set the value to fetch value accordingly
-//        exampleUser.setUserId(1); // we set the value to fetch value accordingly
+        User user = (User)session.get(User.class,1); // now it fetch user object from DB
+        // assume there is lot of code b/w and we again fetch that same user
+//        user.setUserName("sdfdsfs");
+        User user2 = (User)session.get(User.class,1); // now it will not fetch user object from DB it will pick from cache
+        // The reason is that the hibernate know b/w these 2 line there is no code for updating data so it will fetch from cache
 
-        // now we create example object which hibernate can use and pass our example use Object
-//        Example example = Example.create(exampleUser);
-//        Example example = Example.create(exampleUser).excludeProperty("userName");
-        // used with like
-        Example example = Example.create(exampleUser).enableLike();
-
-        Criteria criteria = session.createCriteria(User.class)
-                            .add(example);
-        // createCriteria has add which takes criteria
-
-        // so,now what is the need of this let's see
-        //lets comment setUserName then it will return all user reason
-        //now we comment setUserid then only match record will be displayed
-
-        /*
-        *
-        * The reason is hibernate ignores 2 things considering example is if any of the property has the value
-        * of null it will not consider it.
-        *
-        * If property happens to be a primary key it will not consider that
-         *
-         * apart from the above it consider every thing
-        *
-        *
-        * while creating example object we can ask hibenrate to exlcude or ignore properties using exclude
-        * method
-        *
-        * we can also like operator using enable like
-        *
-        * */
-
-        List<User> userIdList = criteria.list();
-
+        // and if update the same user and again fetch it then there will be 1 select query because hibernate has the
+        //update will get from update command
 
         session.getTransaction().commit();
         session.close();
-        for(User user: userIdList){
-            System.out.println(user.getUserName());
-        }
 
+        Session session2 = sessionFactory.openSession();
+        session2.beginTransaction();
+        session2.get(User.class,1);
+        session2.getTransaction().commit();
+        session2.close();
+
+        // now for session 2 it will fetch from DB again becoz first session is closed so its cache also
+
+        // This problem will be solved in second level cache both these session will talk to second level cache.
+       // Once we have object in second level cache then session 2 will get data from second level cache and go to
+        // database if not found in 1st and 2nd level cache
     }
 }
