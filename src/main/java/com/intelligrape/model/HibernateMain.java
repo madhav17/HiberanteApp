@@ -5,6 +5,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -29,24 +30,51 @@ public class HibernateMain {
         session = sessionFactory.openSession();
         session.beginTransaction();
 
-        // Projection is gerenally used for implementing agreegate function and grouping function
+        User exampleUser = new User();
+        // we can set multiple porperties
+//        exampleUser.setUserName("Madhav1"); // we set the value to fetch value accordingly
+        // used with
+        exampleUser.setUserName("Madhav%"); // we set the value to fetch value accordingly
+//        exampleUser.setUserId(1); // we set the value to fetch value accordingly
+
+        // now we create example object which hibernate can use and pass our example use Object
+//        Example example = Example.create(exampleUser);
+//        Example example = Example.create(exampleUser).excludeProperty("userName");
+        // used with like
+        Example example = Example.create(exampleUser).enableLike();
+
         Criteria criteria = session.createCriteria(User.class)
-                            .setProjection(Projections.property("userId"))
-                            .addOrder(Order.desc("userId"));
+                            .add(example);
+        // createCriteria has add which takes criteria
 
-        //aggregration
-//        Criteria criteria = session.createCriteria(User.class)
-//                .setProjection(Projections.max("userId"));
+        // so,now what is the need of this let's see
+        //lets comment setUserName then it will return all user reason
+        //now we comment setUserid then only match record will be displayed
 
-    // ordering
+        /*
+        *
+        * The reason is hibernate ignores 2 things considering example is if any of the property has the value
+        * of null it will not consider it.
+        *
+        * If property happens to be a primary key it will not consider that
+         *
+         * apart from the above it consider every thing
+        *
+        *
+        * while creating example object we can ask hibenrate to exlcude or ignore properties using exclude
+        * method
+        *
+        * we can also like operator using enable like
+        *
+        * */
 
-        List<Integer> userIdList = criteria.list();
+        List<User> userIdList = criteria.list();
 
 
         session.getTransaction().commit();
         session.close();
-        for(Integer id : userIdList){
-            System.out.println(id);
+        for(User user: userIdList){
+            System.out.println(user.getUserName());
         }
 
     }
