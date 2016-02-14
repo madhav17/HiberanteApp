@@ -21,7 +21,7 @@ public class HibernateMain {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        for(int i = 1;i<=10;i++){
+        for (int i = 1; i <= 10; i++) {
             session.save(new User("Madhav" + i));
         }
 
@@ -29,25 +29,27 @@ public class HibernateMain {
         session.close();
 
         session = sessionFactory.openSession();
-        session.beginTransaction();
-
-        User user = (User) session.get(User.class,1);
-
-        session.getTransaction().commit();
+        Query query = session.createQuery("from User where userId = 1");
+        query.setCacheable(true);
+        List<User> userList = (List<User>) query.list();
+        printlList(userList);
         session.close();
 
         Session session2 = sessionFactory.openSession();
-        session2.beginTransaction();
+        Query query2 = session2.createQuery("from  User where userId = 1");
+        query2.setCacheable(true);
+        // we need to make both the queries as setCacheable true
+        // w/o query cache it will result in 2 queries
+        // with query cache it will not result in a query becoz query is already cached.
 
-        user = (User) session2.get(User.class,1);
-        // w/o 2nd level cache get will hit two queries to DB
-        //with 2nd level cache it will result in 1 query to DB
-        // if it is not found in session then it will check in 2nd level cache
-        session2.getTransaction().commit();
+        List<User> userList1 = (List<User>) query2.list();
+        printlList(userList1);
         session2.close();
+    }
 
-
-
-
+    public static void printlList(List<User> userList) {
+        for (User user : userList) {
+            System.out.println(user.getUserName());
+        }
     }
 }
