@@ -1,6 +1,7 @@
 package com.intelligrape.model;
 
 import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cache;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
@@ -10,6 +11,8 @@ import javax.persistence.Table;
 import java.util.*;
 
 @Entity
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 @Table(name = "user")
 public class User {
 

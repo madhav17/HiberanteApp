@@ -27,31 +27,27 @@ public class HibernateMain {
 
         session.getTransaction().commit();
         session.close();
+
         session = sessionFactory.openSession();
         session.beginTransaction();
 
-        User user = (User)session.get(User.class,1); // now it fetch user object from DB
-        // assume there is lot of code b/w and we again fetch that same user
-//        user.setUserName("sdfdsfs");
-        User user2 = (User)session.get(User.class,1); // now it will not fetch user object from DB it will pick from cache
-        // The reason is that the hibernate know b/w these 2 line there is no code for updating data so it will fetch from cache
-
-        // and if update the same user and again fetch it then there will be 1 select query because hibernate has the
-        //update will get from update command
+        User user = (User) session.get(User.class,1);
 
         session.getTransaction().commit();
         session.close();
 
         Session session2 = sessionFactory.openSession();
         session2.beginTransaction();
-        session2.get(User.class,1);
+
+        user = (User) session2.get(User.class,1);
+        // w/o 2nd level cache get will hit two queries to DB
+        //with 2nd level cache it will result in query to DB
+        // it not found in session then it will check in 2nd level cache
         session2.getTransaction().commit();
         session2.close();
 
-        // now for session 2 it will fetch from DB again becoz first session is closed so its cache also
 
-        // This problem will be solved in second level cache both these session will talk to second level cache.
-       // Once we have object in second level cache then session 2 will get data from second level cache and go to
-        // database if not found in 1st and 2nd level cache
+
+
     }
 }
