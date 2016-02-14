@@ -41,8 +41,8 @@ public class HibernateMain {
 
         user = (User) session2.get(User.class,1);
         // w/o 2nd level cache get will hit two queries to DB
-        //with 2nd level cache it will result in query to DB
-        // it not found in session then it will check in 2nd level cache
+        //with 2nd level cache it will result in 1 query to DB
+        // if it is not found in session then it will check in 2nd level cache
         session2.getTransaction().commit();
         session2.close();
 
