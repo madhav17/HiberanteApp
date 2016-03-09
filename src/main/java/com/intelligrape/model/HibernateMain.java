@@ -1,9 +1,6 @@
 package com.intelligrape.model;
 
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Order;
@@ -48,6 +45,12 @@ public class HibernateMain {
         session2.getTransaction().commit();
         session2.close();
 
+        //user is database table name
+        String sql = "SELECT * FROM user WHERE userId = :userId";
+        SQLQuery query = session2.createSQLQuery(sql);
+        query.setParameter("userId", 1);
+        System.out.println( query.list());
+        session2.close();
         // now for session 2 it will fetch from DB again becoz first session is closed so its cache also
 
         // This problem will be solved in second level cache both these session will talk to second level cache.
